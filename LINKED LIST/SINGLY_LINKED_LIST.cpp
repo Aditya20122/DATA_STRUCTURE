@@ -116,12 +116,25 @@ void delete_last()
     t->next=y->next;
     free(y);
 }
-void delete_pos(int pos)
+void delete_node(int pos)
 {
     int c=1;
-    struct node *t;*y;
+    struct node *t,*y;
     t=first;
     while(c!=pos-1)
+    {
+        t=t->next;
+        c++;
+    }
+    y=t->next;
+    t->next=y->next;
+    free(y);
+}
+void delete_after_node(int key)
+{
+    struct node *t,*y;
+    t=first;
+    while(t->info!=key)
     {
         t=t->next;
     }
@@ -134,8 +147,8 @@ int main()
 {
     int c,n,choice,count=0;
     do
-    {}
-        cout<<"Enter singly linked list operation :\n1.insert 2.display\n\nchoice:-";
+    {
+        cout<<"Enter singly linked list operation :\n1.insert 2.delete 3.display\n\nchoice:-";
         cin>>choice;
         switch(choice)
         {
@@ -169,7 +182,7 @@ int main()
            
                 case 4:
                 int key;
-                cout<<"Enter number & position which you want to insert :\n";
+                cout<<"Enter number  which you want to insert :\n";
                 cout<<"number :";
                 cin>>n;
                 cout<<"\nEnter content of node which you want to insert after node :\ncontent:";
@@ -183,6 +196,39 @@ int main()
              break;
 
              case 2:
+             int Ch;
+             cout<<"select option of node for delete:\n1.first 2.last 3. any node 4.after given node\n\nchoice:-";
+             cin>>Ch;
+             switch(Ch)
+             {
+                case 1:
+
+                delete_first();
+                break;
+
+                case 2:
+                delete_last();
+                break;
+                
+                case 3:
+                int pos;
+                cout<<"Enter postion which you want to delete :\n";
+                cout<<"\nposition :";
+                cin>>pos;
+                delete_node(pos);
+                break;
+           
+                case 4:
+                int key;
+                cout<<"\nEnter content of node which you want to delete after node :\ncontent:";
+                cin>>key;
+                delete_after_node(key);
+                break;
+                default:
+                cout<<"\ninvalid choice!!!";
+             }
+             break;
+             case 3:
              display();
              break;
 
